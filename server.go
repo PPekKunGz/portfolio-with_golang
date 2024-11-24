@@ -22,12 +22,15 @@ func main() {
 
 	// เพิ่ม Middleware
 	app.Use(cors.New(cors.Config{
-		AllowOrigins: "http://localhost:3000",          // อนุญาต Origin ของ Frontend
+		AllowOrigins: "*",                              // อนุญาต Origin ของ Frontend
 		AllowMethods: "GET,POST,HEAD,PUT,DELETE,PATCH", // อนุญาต Methods
 	}))
 
 	// เพิ่ม routes
 	routes.RegisterRoutes(app, db)
+
+	app.Static("/data", "./public")
+	routes.LanguageRoutes(app)
 
 	// รันเซิร์ฟเวอร์
 	log.Fatal(app.Listen(":3001"))

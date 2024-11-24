@@ -1,0 +1,15 @@
+[
+  { "name": "NextJS", "enabled": true },
+  { "name": "TailwindCSS", "enabled": false },
+  { "name": "HTML", "enabled": false },
+  { "name": "CSS", "enabled": false },
+  { "name": "JavaScript", "enabled": false },
+  { "name": "AngularJS", "enabled": false },
+  { "name": "Java", "enabled": false },
+  { "name": "Flutter", "enabled": false },
+  { "name": "SASS", "enabled": false },
+  { "name": "Typescript", "enabled": false },
+  { "name": "NodeJS", "enabled": false },
+  { "name": "ExpressJS", "enabled": false },
+  { "name": "MariaDB", "enabled": false }
+]
