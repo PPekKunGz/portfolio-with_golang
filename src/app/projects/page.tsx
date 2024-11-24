@@ -1,7 +1,7 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import ProjectCard from '@/components/ProjectCard';
-import { Project } from '@/interface/project';
+import { Project } from '@/interface/interface';
 import Loading from '@/components/assets/Loading';
 
 const Projects: React.FC = () => {
@@ -12,7 +12,7 @@ const Projects: React.FC = () => {
     useEffect(() => {
         const fetchProjects = async () => {
             try {
-                const response = await fetch(`${process.env.apiUrl}/projects`); // ใช้ process.env.apiUrl
+                const response = await fetch(`${process.env.apiUrl}/projects`);
                 if (!response.ok) {
                     throw new Error(`Failed to fetch projects: ${response.status}`);
                 }
@@ -33,7 +33,7 @@ const Projects: React.FC = () => {
     if (error) return <div className='flex justify-center items-center h-[86vh] mt-20 md:mt-42'><span className="text-xl md:text-3xl font-bold space-mono text-zinc-700 bg-white rounded-full px-2 py-1 tracking-widest">Error: {error}</span></div>;
 
     return (
-        <div className="container mx-auto flex gap-16 md:gap-5 flex-wrap md:justify-normal justify-center px-4 py-8 mt-20 md:mt-42 max-h-[400px] overflow-y-auto
+        <div data-aos="fade-up" className="container mx-auto flex gap-16 md:gap-5 flex-wrap md:justify-center justify-center px-4 py-8 mt-20 md:mt-42 overflow-y-auto
   [&::-webkit-scrollbar]:w-1.5
   [&::-webkit-scrollbar-track]:bg-gray-100
   [&::-webkit-scrollbar-thumb]:bg-gray-300

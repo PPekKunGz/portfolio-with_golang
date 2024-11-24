@@ -1,10 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { createTheme, localStorageColorSchemeManager, MantineProvider, rem } from '@mantine/core';
-// import AOS from 'aos';
-// import 'aos/dist/aos.css';
-import { useSearchParams, usePathname, useRouter } from 'next/navigation'
 import HeaderMenu from '@/components/layouts/HeaderMenu';
 import Footer from '@/components/layouts/Footer';
 
@@ -60,14 +56,6 @@ const colorSchemeManager = localStorageColorSchemeManager({
 });
 
 export default function AppProvider({ children }: MainLayoutProps) {
-    const router = useRouter();
-    const pathname = usePathname()
-    const searchParams = useSearchParams()
-    const [isLoading, setIsLoaded] = useState(false);
-
-    useEffect(() => {
-        // AOS.init();
-    }, []);
     return (
         <MantineProvider theme={theme} colorSchemeManager={colorSchemeManager}>
             <HeaderMenu />

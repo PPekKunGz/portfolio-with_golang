@@ -8,6 +8,7 @@ const nextConfig = {
   },
   env: {
     apiUrl: 'http://localhost:3001',
+    ghUrl: 'https://api.github.com/users'
   }
 };
 

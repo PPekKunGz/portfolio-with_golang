@@ -31,10 +31,6 @@ export default function HeaderMenu() {
                             : "tracking-wide text-[16px] font-bold inline-block relative hover:text-primary after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all after:duration-300 after:ease-in-out hover:after:w-full"}>
                             ผลงาน
                         </Link>
-                        <Link href={route.shop} className={currentPath === "/shop" ? "tracking-wide text-[16px] font-bold inline-block relative hover:text-primary bg-gradient-to-r from-white via-white to-white bg-[length:100%_2px] bg-no-repeat bg-bottom"
-                            : "tracking-wide text-[16px] font-bold inline-block relative hover:text-primary after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all after:duration-300 after:ease-in-out hover:after:w-full"}>
-                            ภาษาที่ใช้งาน
-                        </Link>
                         <Link href={route.contact} className={currentPath === "/contact" ? "tracking-wide text-[16px] font-bold inline-block relative hover:text-primary bg-gradient-to-r from-white via-white to-white bg-[length:100%_2px] bg-no-repeat bg-bottom"
                             : "tracking-wide text-[16px] font-bold inline-block relative hover:text-primary after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all after:duration-300 after:ease-in-out hover:after:w-full"}>
                             ติดต่อ
