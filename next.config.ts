@@ -7,7 +7,7 @@ const nextConfig = {
     minimumCacheTTL: 60,
   },
   env: {
-    apiUrl: 'http://localhost:3001',
+    apiUrl: 'https://go-portfolio.xn--12cgj3ga1lya4d6c.xn--o3cw4h',
     ghUrl: 'https://api.github.com/users'
   }
 };
