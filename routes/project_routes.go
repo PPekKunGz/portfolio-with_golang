@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"log"
+	"os"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -46,6 +47,17 @@ func RegisterRoutes(app *fiber.App, db *sql.DB) {
 
 	// Route สำหรับเพิ่มโปรเจกต์ใหม่
 	app.Post("/projects", func(c *fiber.Ctx) error {
+
+		apiKey := os.Getenv("API_KEY")
+		if apiKey == "" {
+			log.Fatalf("API_KEY not set in .env")
+		}
+		// ตรวจสอบ API Key จาก Header
+		requestAPIKey := c.Get("X-API-Key")
+		if requestAPIKey != apiKey {
+			return c.Status(401).JSON(fiber.Map{"error": "Unauthorized"})
+		}
+
 		var project struct {
 			Title        string   `json:"title"`
 			Description  string   `json:"description"`
