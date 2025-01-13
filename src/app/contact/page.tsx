@@ -8,6 +8,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { SlSocialTwitter } from 'react-icons/sl';
 import { PiAngularLogo } from 'react-icons/pi';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const technologiesArray: { label: string; emoji: JSX.Element }[] = [
     { label: 'NextJS', emoji: <SiNextdotjs size={40} style={{ color: '#0070f3' }} /> },
@@ -32,7 +33,8 @@ const technologiesArray: { label: string; emoji: JSX.Element }[] = [
 ];
 
 const Language: React.FC = () => {
-    const [language, setLanguage] = useState<Languages[]>([]);
+    const { language } = useLanguage();
+    const [ilanguage, setILanguage] = useState<Languages[]>([]);
     const [githubUser, setGithubUser] = useState<GithubUser | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -46,7 +48,7 @@ const Language: React.FC = () => {
                 }
 
                 const data: Languages[] = await response.json();
-                setLanguage(data);
+                setILanguage(data);
             } catch (err: any) {
                 setError(err.message);
             } finally {
@@ -90,9 +92,9 @@ const Language: React.FC = () => {
     if (error) return <div className='flex justify-center items-center h-[86vh] mt-20 md:mt-42'><span className="text-xl md:text-3xl font-bold space-mono text-zinc-700 bg-white rounded-full px-2 py-1 tracking-widest">Error: {error}</span></div>;
 
     return (
-        <div className="container mx-auto flex flex-col lg:flex-row gap-10 px-4 py-8 mt-20 md:mt-42">
-            <div className="bg-gray-500 p-4 w-full lg:w-1/3 relative rounded-xl">
-                <div className='flex flex-col justify-center items-center bg-white/10 p-5 rounded-xl'>
+        <div className="container mx-auto flex flex-col lg:flex-row gap-10 px-4 py-8 mt-20 md:mt-42 h-full">
+            <div className="bg-gray-500 p-4 w-full lg:w-1/3 relative rounded-xl" id='#github'>
+                <div className='flex flex-col h-full justify-center items-center bg-white/10 p-5 rounded-xl'>
                     {githubUser?.avatar_url && (
                         <Image src={githubUser.avatar_url} alt={githubUser.name || "GitHub User"} width={200} height={100} draggable="false" className='rounded-full mx-auto mt-4 border-4' />
                     )}
@@ -128,19 +130,27 @@ const Language: React.FC = () => {
                         alt={githubUser?.name || ""} height={10} width={10} className='w-fit' />
                 </div>
             </div>
-            <div className="bg-gray-500 p-4 h-fit lg:w-2/3 relative rounded-xl">
+            <div className="bg-gray-500 p-4 h-full lg:w-2/3 relative hidden xl:block rounded-xl" id='#language'>
                 <div className="flex flex-row flex-wrap gap-5 h-fit bg-white/10 p-5 rounded-xl">
-                    <div className="flex-1 flex flex-wrap justify-center lg:justify-normal gap-3">
-                        {language.map((lang, index) => {
+                    <div className="flex flex-wrap justify-center lg:justify-normal gap-3" style={{justifyContent: "center"}}>
+                        {ilanguage.map((lang, index) => {
                             const matchingTech = technologiesArray.find((tech) => tech.label.toLowerCase() === lang.name.toLowerCase());
                             return (
-                                <div key={index} className="gap-3 flex flex-col items-center text-center justify-center px-8 py-5 rounded shadow-md bg-neutral-800/80">
+                                <div key={index} className="gap-3 flex flex-col items-center text-center justify-center w-32 h-32 px-8 py-5 rounded shadow-md bg-neutral-800/80">
                                     {matchingTech ? (matchingTech.emoji) : (<span className="text-gray-500">No Icon</span>)}
                                     <h3 className="text-lg font-semibold">{lang?.name || ""}</h3>
                                 </div>
                             );
                         })}
                     </div>
+                </div>
+            </div>
+            <div className="bg-gray-500 p-4 pt-5 pb-5 h-full lg:w-2/3 relative rounded-xl" id='#team'>
+                <div className="flex items-center flex-col flex-wrap gap-5 h-fit bg-white/10 p-5 rounded-xl">
+                    <Image src={'https://cdn-dms.mckimkung.in.th/1i4nfi1sr/DimensionPortalFull.png'} alt={''} width={500} height={500} draggable="false" className='rounded-xl' />
+                    <h1 className='text-xl xl:text-3xl underline'>{language === "en" ? "@Dimension Studio" : language === "th" ? "ไดเมนชั่นสตูดิโอ" : ""}</h1>
+                    <span></span>
+                    <Link href={"https://dimension-studio.net"} target={isMdOrAbove ? '_blank' : undefined} rel={isMdOrAbove ? 'noopener noreferrer' : undefined} className='uppercase'>dimension-studio.net</Link>
                 </div>
             </div>
         </div>

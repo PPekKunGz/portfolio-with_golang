@@ -4,10 +4,11 @@ import React, { useState, useEffect } from 'react';
 import classes from './BadgeCard.module.css';
 import { IconHeart } from '@tabler/icons-react';
 import Link from 'next/link';
-import { FaSun, FaServer , FaSwimmingPool } from 'react-icons/fa';
+import { FaSun, FaServer, FaSwimmingPool } from 'react-icons/fa';
 import { SiNextdotjs, SiPhp, SiDiscord, SiShadcnui, SiTypescript, SiTailwindcss, SiMui, SiHtml5, SiNodedotjs, SiExpress, SiFfmpeg, SiAxios, SiMariadb, SiJsonwebtokens, SiIntellijidea, SiContactlesspayment, SiCodeblocks } from 'react-icons/si';
 import { TbBrandMinecraft } from 'react-icons/tb';
 import { FaPeopleGroup } from 'react-icons/fa6';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface Project {
     id: number;
@@ -53,6 +54,7 @@ const technologiesArray: { label: string; emoji: JSX.Element }[] = [
 
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
+    const { language } = useLanguage();
     const fontClass = isEnglishText(project.title) ? 'font-space-mono' : 'font-space-mono';
     let parsedTechnologies: string[] = [];
     try {
@@ -88,7 +90,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
     return (
         <Card className={`${classes.card} flex w-72 border border-r-4 border-b-4 border-zinc-900/70`}>
             <Card.Section>
-                <Image src={project.image} alt={project.title} width={150} height={100} draggable="false" className="w-full h-32 object-cover"/>
+                <Image src={project.image} alt={project.title} width={150} height={100} draggable="false" className="w-full h-32 object-cover" />
             </Card.Section>
             <Card.Section p="sm">
                 <Group justify="apart">
@@ -111,11 +113,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
             </Card.Section>
             <Group mt="xs" className='flex justify-center w-full'>
                 <Link href={project.url} target={isMdOrAbove ? '_blank' : undefined} rel={isMdOrAbove ? 'noopener noreferrer' : undefined} className=''>
-                    <Button className='w-40' radius="md" style={{ flex: 1 }}>ดูตัวอย่างงาน</Button>
+                    <Button className='w-40' radius="md" style={{ flex: 1 }}>{language === "en" ? "Viewing" : language === "th" ? "ดูตัวอย่างงาน" : ""}</Button>
                 </Link>
-                <ActionIcon variant="default" radius="md" size={36}>
-                    <IconHeart className={classes.like} stroke={1.5} />
-                </ActionIcon>
+                <Link href={"https://github.com/PPekKunGz"} target={isMdOrAbove ? '_blank' : undefined} rel={isMdOrAbove ? 'noopener noreferrer' : undefined} className=''>
+                    <ActionIcon variant="default" radius="md" size={36}>
+                        <IconHeart className={classes.like} stroke={1.5} />
+                    </ActionIcon>
+                </Link>
             </Group>
         </Card>
     );
